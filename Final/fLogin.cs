@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Final.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,10 +25,25 @@ namespace Final
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            fTableManager f = new fTableManager();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            string userName = txbUserName.Text;
+            string passWord = txbPassWord.Text;
+            if (Login(userName,passWord))
+            {
+                fTableManager f = new fTableManager();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wrong username or password!");
+            }
+        }
+
+        bool Login(string userName, string passWord)
+        {
+
+            return AccountDAO.Instance.Login(userName, passWord);
         }
 
         private void btnExit_Click(object sender, EventArgs e)

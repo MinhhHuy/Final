@@ -35,6 +35,10 @@
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lsvBill = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel3 = new System.Windows.Forms.Panel();
             this.cbSwitchTable = new System.Windows.Forms.ComboBox();
             this.btnSwitchTable = new System.Windows.Forms.Button();
@@ -85,7 +89,7 @@
             // userInfoToolStripMenuItem
             // 
             this.userInfoToolStripMenuItem.Name = "userInfoToolStripMenuItem";
-            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.userInfoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.userInfoToolStripMenuItem.Text = "User Info";
             this.userInfoToolStripMenuItem.Click += new System.EventHandler(this.userInfoToolStripMenuItem_Click);
             // 
@@ -93,7 +97,7 @@
             // 
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
             this.logOutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F4)));
-            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logOutToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.logOutToolStripMenuItem.Text = "Log Out";
             this.logOutToolStripMenuItem.Click += new System.EventHandler(this.logOutToolStripMenuItem_Click);
             // 
@@ -107,12 +111,39 @@
             // 
             // lsvBill
             // 
+            this.lsvBill.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lsvBill.GridLines = true;
             this.lsvBill.HideSelection = false;
             this.lsvBill.Location = new System.Drawing.Point(3, 3);
             this.lsvBill.Name = "lsvBill";
             this.lsvBill.Size = new System.Drawing.Size(341, 325);
             this.lsvBill.TabIndex = 0;
             this.lsvBill.UseCompatibleStateImageBehavior = false;
+            this.lsvBill.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Food Name";
+            this.columnHeader1.Width = 145;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Amount";
+            this.columnHeader2.Width = 51;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Price";
+            this.columnHeader3.Width = 68;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Total Price";
+            this.columnHeader4.Width = 84;
             // 
             // panel3
             // 
@@ -228,6 +259,7 @@
             // 
             // flpTable
             // 
+            this.flpTable.AutoScroll = true;
             this.flpTable.Location = new System.Drawing.Point(12, 30);
             this.flpTable.Name = "flpTable";
             this.flpTable.Size = new System.Drawing.Size(423, 456);
@@ -280,5 +312,9 @@
         private System.Windows.Forms.Button btnDiscount;
         private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.FlowLayoutPanel flpTable;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

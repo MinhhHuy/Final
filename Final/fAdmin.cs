@@ -18,22 +18,10 @@ namespace Final
         {
             InitializeComponent();
 
-            LoadAccountList();
+            
         }
 
-        void LoadAccountList()
-        {
-        
-            string query = "EXEC dbo.USP_GetAccountByUserName @userName";
-
-            dtgvAccount.DataSource = DataProvider.Instance.ExecuteQuery(query, new object[] { "pro"});
-        }
-
-        void LoadFoodList()
-        {
-            string query = "SELECT * FROM FOOD";
-            dtgvFood.DataSource = DataProvider.Instance.ExecuteQuery(query);
-        }
+       
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 

@@ -24,13 +24,12 @@ namespace Final.DAO
 
         private string connectionSTR = "Data Source=.\\SQLEXPRESS;Initial Catalog=QuanLyQuanAn;Integrated Security=True";
 
-        public DataTable ExecuteQuery(string query, object [] parameter = null)
+        public DataTable ExecuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
 
             using (SqlConnection connection = new SqlConnection(connectionSTR))
             {
-                //string query = "SELECT * FROM dbo.Account";
                 connection.Open();
 
                 SqlCommand command = new SqlCommand(query, connection);
@@ -39,8 +38,7 @@ namespace Final.DAO
                 {
                     string[] listPara = query.Split(' ');
                     int i = 0;
-
-                    foreach(string item in listPara)
+                    foreach (string item in listPara)
                     {
                         if (item.Contains('@'))
                         {
@@ -55,9 +53,8 @@ namespace Final.DAO
                 adapter.Fill(data);
 
                 connection.Close();
-
-                
             }
+
             return data;
         }
 
