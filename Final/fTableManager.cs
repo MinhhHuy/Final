@@ -39,7 +39,7 @@ namespace Final
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void userInfoToolStripMenuItem_Click(object sender, EventArgs e)

@@ -10,3 +10,15 @@ E:\Kteam\Final\obj\Debug\Final.fTableManager.resources
 E:\Kteam\Final\obj\Debug\Final.csprojAssemblyReference.cache
 E:\Kteam\Final\obj\Debug\Final.fAccountProfile.resources
 E:\Kteam\Final\obj\Debug\Final.fAdmin.resources
+E:\Thang\Final\Final\bin\Debug\Final.exe.config
+E:\Thang\Final\Final\bin\Debug\Final.exe
+E:\Thang\Final\Final\bin\Debug\Final.pdb
+E:\Thang\Final\Final\obj\Debug\Final.csprojAssemblyReference.cache
+E:\Thang\Final\Final\obj\Debug\Final.fAccountProfile.resources
+E:\Thang\Final\Final\obj\Debug\Final.fAdmin.resources
+E:\Thang\Final\Final\obj\Debug\Final.fLogin.resources
+E:\Thang\Final\Final\obj\Debug\Final.fTableManager.resources
+E:\Thang\Final\Final\obj\Debug\Final.Properties.Resources.resources
+E:\Thang\Final\Final\obj\Debug\Final.csproj.GenerateResource.cache
+E:\Thang\Final\Final\obj\Debug\Final.exe
+E:\Thang\Final\Final\obj\Debug\Final.pdb
