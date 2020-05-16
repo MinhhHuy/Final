@@ -229,7 +229,7 @@ INSERT dbo.Bill
 VALUES
 ( GETDATE(), --DATECHECKIN
   GETDATE(), --DATECHECKOUT
-  2, -- IDTABLE
+  3, -- IDTABLE
   1 -- STATUS
 )
 
@@ -278,8 +278,8 @@ VALUES
  INSERT dbo.BillInfo
 (idBill, idFood, count)
 VALUES
-( 3, -- idBill
-  5, -- idFood
+( 7, -- idBill
+  1, -- idFood
   2  --count
  )
 
@@ -289,8 +289,117 @@ SELECT * FROM dbo.Bill
 SELECT * FROM dbo.BillInfo
 SELECT * FROM dbo.Food
 SELECT * FROM dbo.FoodCategory
+DELETE FROM dbo.Food WHERE id = 30
 
 SELECT id FROM dbo.Bill WHERE idTable = 2 and status = 0
 SELECT * FROM dbo.BillInfo WHERE idBill = 2
 
 SELECT f.name, bi.count, f.price, f.price * bi.count AS totalPrice FROM dbo.BillInfo AS bi, dbo.Bill AS b, dbo.Food AS f WHERE bi.idBill = b.id AND bi.idFood = f.id AND b.idTable = 1
+
+GO
+
+CREATE PROC USP_InsertBill
+@idTable INT
+AS
+BEGIN
+	INSERT dbo.Bill
+	(DateCheckIn,DateCheckOut,idTable,status)
+	VALUES ( GETDATE(), --DateCheckIn
+			 NULL, --DateCheckOut
+			 @idTable, --idTable
+			 0 --status
+			 )
+END
+GO
+
+CREATE PROC USP_InsertBillInfo
+@idBill INT, @idFood INT, @count INT
+AS 
+BEGIN
+	 INSERT dbo.BillInfo
+	(idBill, idFood, count)
+	VALUES
+	( @idBill, -- idBill
+	 @idFood, -- idFood
+	 @count  --count
+		)
+END
+GO
+
+ALTER PROC USP_InsertBillInfo
+@idBill INT, @idFood INT, @count INT
+AS
+BEGIN
+
+DECLARE @isExitsBillInfo INT;
+DECLARE @foodCount INT = 1;
+
+SELECT @isExitsBillInfo = id, @foodCount= b.count 
+FROM dbo.BillInfo AS b 
+WHERE idBill = @idBill AND idFood = @idFood
+
+IF (@isExitsBillInfo > 0)
+	BEGIN
+		DECLARE @newCount INT = @foodCount + @count
+		IF (@newCount > 0)
+			UPDATE dbo.BillInfo SET count = @foodCount + @count where idFood = @idFood
+		ELSE 
+			DELETE dbo.BillInfo WHERE idBill = @idBill AND idFood = @idFood
+	END
+ELSE 
+	BEGIN
+		 INSERT dbo.BillInfo
+			(idBill, idFood, count)
+		VALUES
+			( @idBill, -- idBill
+				@idFood, -- idFood
+				@count  --count
+				)
+	END
+END
+GO
+
+DELETE dbo.BillInfo
+
+DELETE dbo.Bill
+
+UPDATE dbo.Bill SET status = 1 WHERE id =1
+GO
+
+CREATE TRIGGER UTG_UpdateBillInfo
+ON dbo.BillInfo FOR INSERT, UPDATE
+AS
+BEGIN
+	DECLARE @idBill INT
+
+	SELECT @idBill = idBill FROM Inserted
+
+	DECLARE @idTable INT
+
+	SELECT @idTable = idTable FROM dbo.Bill WHERE id = @idBill AND status = 0
+
+	UPDATE dbo.TableFood SET status = N'Unavailable' WHERE id = @idTable
+END
+GO
+
+CREATE TRIGGER UTG_UpdateBill
+ON dbo.Bill FOR UPDATE
+AS
+BEGIN
+	DECLARE @idBill INT
+
+	SELECT @idBill = id FROM Inserted
+
+	DECLARE @idTable INT
+
+	SELECT @idTable = idTable FROM dbo.Bill WHERE id = @idBill 
+
+	DECLARE @count INT = 0
+
+	SELECT @count = COUNT(*) FROM dbo.Bill WHERE idTable = @idTable AND status = 0
+
+	IF (@count = 0)
+		UPDATE dbo.TableFood SET status = N'Available' WHERE id = @idTable
+END
+GO
+

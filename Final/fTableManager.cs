@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,12 +20,27 @@ namespace Final
         {
             InitializeComponent();
             LoadTable();
+            LoadCategory();
         }
 
         #region Method
 
+        void LoadCategory()
+        {
+            List<Category> listCategory = CategoryDAO.Instance.GetListCategories();
+            cbCategory.DataSource = listCategory;
+            cbCategory.DisplayMember = "Name";
+        }
+
+        void LoadFoodListByCategoryID(int id)
+        {
+            List<Food> listFood = FoodDAO.Instance.GetFoodByCategoryID(id);
+            cbFood.DataSource = listFood;
+            cbFood.DisplayMember = "Name";
+        }
         void LoadTable()
         {
+            flpTable.Controls.Clear();
             List<Table> tableList = TableDAO.Instance.LoadTableList();
             foreach ( Table item in tableList)
             {
@@ -48,6 +65,8 @@ namespace Final
         {
             lsvBill.Items.Clear();
             List<Final.DTO.Mennu> listBillInfo = MenuDAO.Instance.GetListMenuByTable(id);
+            float totalPrice = 0;
+
 
             foreach (Final.DTO.Mennu item in listBillInfo)
             {
@@ -55,10 +74,17 @@ namespace Final
                 lsvItem.SubItems.Add(item.Count.ToString());
                 lsvItem.SubItems.Add(item.Price.ToString());
                 lsvItem.SubItems.Add(item.TotalPrice.ToString());
-
+                totalPrice += item.TotalPrice;
                 lsvBill.Items.Add(lsvItem);
             }
+            CultureInfo culture = new CultureInfo("vi-VN");
+
+            //Thread.CurrentThread.CurrentCulture = culture;
+            txbTotalPrice.Text = totalPrice.ToString("c", culture);
+
+          
         }
+
 
         #endregion
 
@@ -67,6 +93,7 @@ namespace Final
         private void btn_Click(object sender, EventArgs e)
         {
             int tableID = ( (sender as Button).Tag as Table).ID;
+            lsvBill.Tag = (sender as Button).Tag;
             ShowBill(tableID);
         }
 
@@ -80,10 +107,7 @@ namespace Final
 
         }
 
-        private void btnCheckOut_Click(object sender, EventArgs e)
-        {
-
-        }
+  
 
         private void btnDiscount_Click(object sender, EventArgs e)
         {
@@ -111,6 +135,74 @@ namespace Final
             fAdmin f = new fAdmin();
             f.ShowDialog();
         }
+        private void cbFood_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = 0;
+
+            ComboBox cb = sender as ComboBox;
+            if (cb.SelectedItem == null)
+                return;
+
+            Category selected = cb.SelectedItem as Category;
+
+            id = selected.ID;
+
+            LoadFoodListByCategoryID(id);
+        }
+            private void btnAddFood_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            int foodID = (cbFood.SelectedItem as Food).ID;
+            int count = (int)nmFoodCount.Value;
+
+            if (idBill == -1)
+            {
+                BillDAO.Instance.InsertBill(table.ID);
+                BillInfoDAO.Instance.InsertBillInfo(BillDAO.Instance.GetMaxIDBill(), foodID, count);
+            }
+            else
+            {
+                BillInfoDAO.Instance.InsertBillInfo(idBill, foodID, count);
+            }
+
+            ShowBill(table.ID);
+            LoadTable();
+        }
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            Table table = lsvBill.Tag as Table;
+
+            int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+
+            if(idBill != -1)
+            {
+                if(MessageBox.Show("Are you sure make bill for table" + table.Name +"?", "Warning",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
+                {
+                    BillDAO.Instance.CheckOut(idBill);
+                    ShowBill(table.ID);
+                    LoadTable();
+                }
+
+            }
+        }
+
         #endregion
+
+        private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSwitchTable_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
