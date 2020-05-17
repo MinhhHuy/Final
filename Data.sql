@@ -303,11 +303,12 @@ CREATE PROC USP_InsertBill
 AS
 BEGIN
 	INSERT dbo.Bill
-	(DateCheckIn,DateCheckOut,idTable,status)
+	(DateCheckIn,DateCheckOut,idTable,status,discount)
 	VALUES ( GETDATE(), --DateCheckIn
 			 NULL, --DateCheckOut
 			 @idTable, --idTable
-			 0 --status
+			 0, --status
+			 0 -- discount
 			 )
 END
 GO
@@ -326,7 +327,7 @@ BEGIN
 END
 GO
 
-ALTER PROC USP_InsertBillInfo
+CREATE PROC USP_InsertBillInfo
 @idBill INT, @idFood INT, @count INT
 AS
 BEGIN
@@ -378,9 +379,19 @@ BEGIN
 
 	SELECT @idTable = idTable FROM dbo.Bill WHERE id = @idBill AND status = 0
 
-	UPDATE dbo.TableFood SET status = N'Unavailable' WHERE id = @idTable
+	DECLARE @count INT
+
+	SELECT @count = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idBill
+
+
+	IF(@count > 0)
+		UPDATE dbo.TableFood SET status = N'Unavailable' WHERE id = @idTable
+	ELSE
+		UPDATE dbo.TableFood SET status = N'Available' WHERE id = @idTable
 END
 GO
+
+
 
 CREATE TRIGGER UTG_UpdateBill
 ON dbo.Bill FOR UPDATE
@@ -400,6 +411,86 @@ BEGIN
 
 	IF (@count = 0)
 		UPDATE dbo.TableFood SET status = N'Available' WHERE id = @idTable
+END
+GO
+
+ALTER TABLE dbo.Bill
+ADD discount INT
+
+
+
+UPDATE dbo.Bill SET discount = 0
+
+SELECT * FROM dbo.Bill
+SELECT * FROM dbo.Food
+
+
+DECLARE @idBill INT = 5
+GO
+
+CREATE PROC USP_SwitchTable
+@idTable1 int, @idTable2 INT
+AS
+BEGIN
+
+	DECLARE @idFirstBill INT
+	DECLARE @idSecondBill INT
+
+	DECLARE @isFirstTableEmpty INT = 1
+	DECLARE @isSecondTableEmpty INT = 1
+
+	SELECT @idSecondBill = id FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
+	SELECT @idFirstBill = id FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
+
+	IF( @idFirstBill IS NULL)
+	BEGIN
+		
+		INSERT dbo.Bill
+			( DateCheckIn, DateCheckOut, idTable, status)
+		VALUES
+			( GETDATE(), --DATECHECKIN
+				 NULL, --DATECHECKOUT
+				 @idTable1, -- IDTABLE
+				 0 -- STATUS
+			 )
+		SELECT @idFirstBill = MAX(id) FROM dbo.Bill WHERE idTable = @idTable1 AND status = 0
+
+	END
+
+
+	SELECT @isFirstTableEmpty = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idFirstBill
+
+	IF( @idSecondBill IS NULL)
+	BEGIN
+		
+		INSERT dbo.Bill
+			( DateCheckIn, DateCheckOut, idTable, status)
+		VALUES
+			( GETDATE(), --DATECHECKIN
+				 NULL, --DATECHECKOUT
+				 @idTable2, -- IDTABLE
+				 0 -- STATUS
+			 )
+		SELECT @idSecondBill = MAX(id) FROM dbo.Bill WHERE idTable = @idTable2 AND status = 0
+
+		
+
+	END
+
+	SELECT @isSecondTableEmpty = COUNT(*) FROM dbo.BillInfo WHERE idBill = @idSecondBill
+
+	SELECT id INTO IDBillInfoTable FROM dbo.BillInfo WHERE idBill = @idSecondBill
+
+	UPDATE dbo.BillInfo SET idBill = @idSecondBill WHERE idBill = @idFirstBill
+
+	UPDATE dbo.BillInfo SET idBill = @idFirstBill WHERE id IN (SELECT * FROM IDBillInfoTable)
+
+	DROP TABLE IDBillInfoTable
+
+	IF(@isFirstTableEmpty = 0)
+		UPDATE dbo.TableFood SET status = N'Available' WHERE id = @idTable2
+	IF(@isSecondTableEmpty = 0)
+		UPDATE dbo.TableFood SET status = N'Available' WHERE id = @idTable1
 END
 GO
 
