@@ -21,6 +21,7 @@ namespace Final
             InitializeComponent();
             LoadTable();
             LoadCategory();
+            LoadComboBoxTable(cbSwitchTable);
         }
 
         #region Method
@@ -84,7 +85,12 @@ namespace Final
 
           
         }
+         void LoadComboBoxTable(ComboBox cb)
+        {
+            cb.DataSource = TableDAO.Instance.LoadTableList();
+            cb.DisplayMember = "Name";
 
+        }
 
         #endregion
 
@@ -180,19 +186,32 @@ namespace Final
             Table table = lsvBill.Tag as Table;
 
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
+            int discount = (int)nmDisCount.Value;
+            double totalPrice = Convert.ToDouble(txbTotalPrice.Text.Split(',')[0]);
+            double finalTotalPrice = totalPrice - (totalPrice / 100) * discount;
 
-            if(idBill != -1)
+            if (idBill != -1)
             {
-                if(MessageBox.Show("Are you sure make bill for table" + table.Name +"?", "Warning",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
+                if(MessageBox.Show(string.Format("Are you sure make bill for {0} ?\n Total Price - (Total Price / 100) x Discount => {1} - ({1} /100) x {2}% = {3}\n------------------------------------\n Total Price is {3}.000đ", table.Name, totalPrice, discount, finalTotalPrice), "Warning",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
                 {
-                    BillDAO.Instance.CheckOut(idBill);
+                    BillDAO.Instance.CheckOut(idBill, discount);
                     ShowBill(table.ID);
                     LoadTable();
                 }
 
             }
         }
-
+        private void btnSwitchTable_Click(object sender, EventArgs e)
+        {
+            
+            int id1 = (lsvBill.Tag as Table).ID;
+            int id2 = (cbSwitchTable.SelectedItem as Table).ID;
+            if (MessageBox.Show(string.Format("Do you want to switch from {0} to {1}", (lsvBill.Tag as Table).Name , (cbSwitchTable.SelectedItem as Table).Name), "Warning", MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
+            {
+                TableDAO.Instance.SwitchTable(id1, id2);
+                LoadTable();
+            }
+        }
         #endregion
 
         private void lsvBill_SelectedIndexChanged(object sender, EventArgs e)
@@ -200,9 +219,6 @@ namespace Final
 
         }
 
-        private void btnSwitchTable_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }
