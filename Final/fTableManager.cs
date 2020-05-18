@@ -194,7 +194,7 @@ namespace Final
             {
                 if(MessageBox.Show(string.Format("Are you sure make bill for {0} ?\n Total Price - (Total Price / 100) x Discount => {1} - ({1} /100) x {2}% = {3}\n------------------------------------\n Total Price is {3}.000đ", table.Name, totalPrice, discount, finalTotalPrice), "Warning",MessageBoxButtons.OKCancel)== System.Windows.Forms.DialogResult.OK)
                 {
-                    BillDAO.Instance.CheckOut(idBill, discount);
+                    BillDAO.Instance.CheckOut(idBill, discount, (float)finalTotalPrice);
                     ShowBill(table.ID);
                     LoadTable();
                 }

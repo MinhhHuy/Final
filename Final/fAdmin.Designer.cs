@@ -197,6 +197,7 @@
             this.btnViewBill.TabIndex = 2;
             this.btnViewBill.Text = "&VIEW";
             this.btnViewBill.UseVisualStyleBackColor = true;
+            this.btnViewBill.Click += new System.EventHandler(this.btnViewBill_Click);
             // 
             // dtpkToDate
             // 
@@ -224,10 +225,14 @@
             // 
             // dtgvBill
             // 
+            this.dtgvBill.AllowUserToAddRows = false;
+            this.dtgvBill.AllowUserToDeleteRows = false;
+            this.dtgvBill.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtgvBill.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgvBill.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgvBill.Location = new System.Drawing.Point(0, 0);
             this.dtgvBill.Name = "dtgvBill";
+            this.dtgvBill.ReadOnly = true;
             this.dtgvBill.Size = new System.Drawing.Size(715, 359);
             this.dtgvBill.TabIndex = 0;
             // 

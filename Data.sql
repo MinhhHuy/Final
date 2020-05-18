@@ -494,3 +494,18 @@ BEGIN
 END
 GO
 
+ALTER TABLE dbo.Bill ADD totalPrice FLOAT
+
+SELECT * FROM dbo.Bill
+GO
+
+CREATE PROC USP_GetListBillByDate
+@checkIn date, @checkOut date
+AS
+BEGIN
+	SELECT t.name AS [Table], b.totalPrice AS [Total Price], DateCheckIn AS [Date In], DateCheckOut AS [Date out], discount AS [Discount (%)] 
+	FROM dbo.Bill AS b, dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idTable 
+END
+GO
