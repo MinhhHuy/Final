@@ -41,5 +41,6 @@ namespace Final.DAO
         {
             DataProvider.Instance.ExecuteQuery("DELETE dbo.BillInfo WHERE idFood = " + id);
         }
+
     }
 }

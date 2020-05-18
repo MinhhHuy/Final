@@ -38,5 +38,45 @@ namespace Final.DAO
             }
             return tableList;
         }
+        public Table GetTableByID(int id)
+        {
+            Table tablefood = null;
+
+            string query = "select * from TableFood where id = " + id;
+
+            DataTable data = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow item in data.Rows)
+            {
+                tablefood = new Table(item);
+                return tablefood;
+            }
+            return tablefood;
+        }
+        public bool InsertTable(string name)
+        {
+            string query = string.Format("INSERT dbo.TableFood( name) VALUES ( N'{0}')", name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateTable(int idTable,string name)
+        {
+            string query = string.Format("UPDATE dbo.TableFood SET name = N'{0}' WHERE id = {1}", name, idTable);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool DeleteTable(int idTable)
+        {
+            BillInfoDAO.Instance.DeleteBillInfoByFoodID(idTable);
+            string query = string.Format("DELETE TableFood WHERE id = {0}", idTable);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
     }
 }

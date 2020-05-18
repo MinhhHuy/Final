@@ -164,7 +164,43 @@ namespace Final
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
+            f.InsertCategory += f_InsertCategory;
+            f.DeleteCategory += f_DeleteCategory;
+            f.UpdateCategory += f_UpdateCategory;
+            f.InsertTable += f_InsertTable;
+            f.DeleteTable += f_DeleteTable;
+            f.UpdateTable += f_UpdateTable;
             f.ShowDialog();
+        }
+
+        private void f_UpdateTable(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_DeleteTable(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_InsertTable(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_UpdateCategory(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_DeleteCategory(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void f_InsertCategory(object sender, EventArgs e)
+        {
+           
         }
 
         private void f_DeleteFood(object sender, EventArgs e)

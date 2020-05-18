@@ -95,6 +95,12 @@ namespace Final.DAO
 
             return list;
         }
+        public void DeleteFoodByCategoryID(int id)
+        {
+            DataProvider.Instance.ExecuteQuery("DELETE dbo.Food WHERE idCategory = " + id);
+            
+        }
+
 
     }
 }

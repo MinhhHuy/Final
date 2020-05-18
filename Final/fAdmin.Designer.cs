@@ -571,6 +571,7 @@
             this.btnEditCategory.TabIndex = 2;
             this.btnEditCategory.Text = "&EDIT";
             this.btnEditCategory.UseVisualStyleBackColor = true;
+            this.btnEditCategory.Click += new System.EventHandler(this.btnEditCategory_Click);
             // 
             // btnDeleteCategory
             // 
@@ -580,6 +581,7 @@
             this.btnDeleteCategory.TabIndex = 1;
             this.btnDeleteCategory.Text = "&DELETE";
             this.btnDeleteCategory.UseVisualStyleBackColor = true;
+            this.btnDeleteCategory.Click += new System.EventHandler(this.btnDeleteCategory_Click);
             // 
             // btnAddCategory
             // 
@@ -589,6 +591,7 @@
             this.btnAddCategory.TabIndex = 0;
             this.btnAddCategory.Text = "&ADD";
             this.btnAddCategory.UseVisualStyleBackColor = true;
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
             // 
             // panel18
             // 
@@ -699,6 +702,7 @@
             this.txbTableID.ReadOnly = true;
             this.txbTableID.Size = new System.Drawing.Size(219, 20);
             this.txbTableID.TabIndex = 1;
+            this.txbTableID.TextChanged += new System.EventHandler(this.txbTableID_TextChanged);
             // 
             // label6
             // 
@@ -738,6 +742,7 @@
             this.btnEditTable.TabIndex = 2;
             this.btnEditTable.Text = "&EDIT";
             this.btnEditTable.UseVisualStyleBackColor = true;
+            this.btnEditTable.Click += new System.EventHandler(this.btnEditTable_Click);
             // 
             // btnDeleteTable
             // 
@@ -747,6 +752,7 @@
             this.btnDeleteTable.TabIndex = 1;
             this.btnDeleteTable.Text = "&DELETE";
             this.btnDeleteTable.UseVisualStyleBackColor = true;
+            this.btnDeleteTable.Click += new System.EventHandler(this.btnDeleteTable_Click);
             // 
             // btnAddTable
             // 
@@ -756,6 +762,7 @@
             this.btnAddTable.TabIndex = 0;
             this.btnAddTable.Text = "&ADD";
             this.btnAddTable.UseVisualStyleBackColor = true;
+            this.btnAddTable.Click += new System.EventHandler(this.btnAddTable_Click);
             // 
             // panel20
             // 
