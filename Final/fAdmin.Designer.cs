@@ -274,6 +274,7 @@
             this.btnSearchFood.TabIndex = 4;
             this.btnSearchFood.Text = "&SEARCH";
             this.btnSearchFood.UseVisualStyleBackColor = true;
+            this.btnSearchFood.Click += new System.EventHandler(this.btnSearchFood_Click);
             // 
             // panel5
             // 
@@ -427,6 +428,7 @@
             this.btnEditFood.TabIndex = 2;
             this.btnEditFood.Text = "&EDIT";
             this.btnEditFood.UseVisualStyleBackColor = true;
+            this.btnEditFood.Click += new System.EventHandler(this.btnEditFood_Click);
             // 
             // btnDeleteFood
             // 
@@ -436,6 +438,7 @@
             this.btnDeleteFood.TabIndex = 1;
             this.btnDeleteFood.Text = "&DELETE";
             this.btnDeleteFood.UseVisualStyleBackColor = true;
+            this.btnDeleteFood.Click += new System.EventHandler(this.btnDeleteFood_Click);
             // 
             // btnAddFood
             // 
@@ -445,6 +448,7 @@
             this.btnAddFood.TabIndex = 0;
             this.btnAddFood.Text = "&ADD";
             this.btnAddFood.UseVisualStyleBackColor = true;
+            this.btnAddFood.Click += new System.EventHandler(this.btnAddFood_Click);
             // 
             // panel3
             // 
@@ -557,6 +561,7 @@
             this.btnShowCategory.TabIndex = 3;
             this.btnShowCategory.Text = "&VIEW";
             this.btnShowCategory.UseVisualStyleBackColor = true;
+            this.btnShowCategory.Click += new System.EventHandler(this.btnShowCategory_Click);
             // 
             // btnEditCategory
             // 

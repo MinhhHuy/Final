@@ -1,4 +1,5 @@
 ﻿using Final.DAO;
+using Final.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Windows.Forms;
 
 namespace Final
 {
+    
     public partial class fLogin : Form
     {
         public fLogin()
@@ -29,7 +31,8 @@ namespace Final
             string passWord = txbPassWord.Text;
             if (Login(userName,passWord))
             {
-                fTableManager f = new fTableManager();
+                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+                fTableManager f = new fTableManager(loginAccount);
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
