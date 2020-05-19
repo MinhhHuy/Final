@@ -161,6 +161,7 @@ namespace Final
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
+            f.loginAccount = LoginAccount;
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
@@ -175,32 +176,46 @@ namespace Final
 
         private void f_UpdateTable(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void f_DeleteTable(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
         }
 
         private void f_InsertTable(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadTable();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void f_UpdateCategory(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void f_DeleteCategory(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
         }
 
         private void f_InsertCategory(object sender, EventArgs e)
         {
-           
+             LoadCategory();
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
         }
 
         private void f_DeleteFood(object sender, EventArgs e)

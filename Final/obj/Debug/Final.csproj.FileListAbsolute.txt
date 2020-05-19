@@ -22,3 +22,15 @@ E:\Thang\Final\Final\obj\Debug\Final.csproj.GenerateResource.cache
 E:\Thang\Final\Final\obj\Debug\Final.exe
 E:\Thang\Final\Final\obj\Debug\Final.pdb
 E:\Thang\Final\Final\obj\Debug\Final.csprojAssemblyReference.cache
+E:\Test\Final\bin\Debug\Final.exe.config
+E:\Test\Final\bin\Debug\Final.exe
+E:\Test\Final\bin\Debug\Final.pdb
+E:\Test\Final\obj\Debug\Final.csprojAssemblyReference.cache
+E:\Test\Final\obj\Debug\Final.fAccountProfile.resources
+E:\Test\Final\obj\Debug\Final.fAdmin.resources
+E:\Test\Final\obj\Debug\Final.fLogin.resources
+E:\Test\Final\obj\Debug\Final.fTableManager.resources
+E:\Test\Final\obj\Debug\Final.Properties.Resources.resources
+E:\Test\Final\obj\Debug\Final.csproj.GenerateResource.cache
+E:\Test\Final\obj\Debug\Final.exe
+E:\Test\Final\obj\Debug\Final.pdb

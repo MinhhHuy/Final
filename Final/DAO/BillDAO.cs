@@ -67,5 +67,10 @@ namespace Final.DAO
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteBillByTableID(int id)
+        {
+            DataProvider.Instance.ExecuteQuery("DELETE dbo.Bill WHERE idTable = " + id);
+        }
     }
 }

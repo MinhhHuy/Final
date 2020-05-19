@@ -78,7 +78,7 @@
             this.tpTable = new System.Windows.Forms.TabPage();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel21 = new System.Windows.Forms.Panel();
-            this.cbTableStatus = new System.Windows.Forms.ComboBox();
+            this.txbTableStatus = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.txbTableName = new System.Windows.Forms.TextBox();
@@ -97,7 +97,6 @@
             this.panel23 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel25 = new System.Windows.Forms.Panel();
-            this.cbAccountType = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
             this.txbDisplayName = new System.Windows.Forms.TextBox();
@@ -112,6 +111,7 @@
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.panel29 = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
+            this.numericUpDownRole = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -151,6 +151,7 @@
             this.panel28.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -635,20 +636,20 @@
             // 
             // panel21
             // 
-            this.panel21.Controls.Add(this.cbTableStatus);
+            this.panel21.Controls.Add(this.txbTableStatus);
             this.panel21.Controls.Add(this.label9);
             this.panel21.Location = new System.Drawing.Point(3, 105);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(309, 45);
             this.panel21.TabIndex = 5;
             // 
-            // cbTableStatus
+            // txbTableStatus
             // 
-            this.cbTableStatus.FormattingEnabled = true;
-            this.cbTableStatus.Location = new System.Drawing.Point(87, 13);
-            this.cbTableStatus.Name = "cbTableStatus";
-            this.cbTableStatus.Size = new System.Drawing.Size(219, 21);
-            this.cbTableStatus.TabIndex = 1;
+            this.txbTableStatus.Location = new System.Drawing.Point(88, 10);
+            this.txbTableStatus.Name = "txbTableStatus";
+            this.txbTableStatus.ReadOnly = true;
+            this.txbTableStatus.Size = new System.Drawing.Size(218, 20);
+            this.txbTableStatus.TabIndex = 1;
             // 
             // label9
             // 
@@ -814,23 +815,16 @@
             this.btnResetPassword.TabIndex = 4;
             this.btnResetPassword.Text = "&RESET PASSWORD";
             this.btnResetPassword.UseVisualStyleBackColor = true;
+            this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // panel25
             // 
-            this.panel25.Controls.Add(this.cbAccountType);
+            this.panel25.Controls.Add(this.numericUpDownRole);
             this.panel25.Controls.Add(this.label11);
             this.panel25.Location = new System.Drawing.Point(3, 105);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(281, 45);
             this.panel25.TabIndex = 5;
-            // 
-            // cbAccountType
-            // 
-            this.cbAccountType.FormattingEnabled = true;
-            this.cbAccountType.Location = new System.Drawing.Point(112, 12);
-            this.cbAccountType.Name = "cbAccountType";
-            this.cbAccountType.Size = new System.Drawing.Size(168, 21);
-            this.cbAccountType.TabIndex = 1;
             // 
             // label11
             // 
@@ -881,7 +875,6 @@
             // 
             this.txbUserName.Location = new System.Drawing.Point(112, 11);
             this.txbUserName.Name = "txbUserName";
-            this.txbUserName.ReadOnly = true;
             this.txbUserName.Size = new System.Drawing.Size(169, 20);
             this.txbUserName.TabIndex = 1;
             // 
@@ -914,6 +907,7 @@
             this.btnShowAccount.TabIndex = 3;
             this.btnShowAccount.Text = "&VIEW";
             this.btnShowAccount.UseVisualStyleBackColor = true;
+            this.btnShowAccount.Click += new System.EventHandler(this.btnShowAccount_Click);
             // 
             // btnEditAccount
             // 
@@ -923,6 +917,7 @@
             this.btnEditAccount.TabIndex = 2;
             this.btnEditAccount.Text = "&EDIT";
             this.btnEditAccount.UseVisualStyleBackColor = true;
+            this.btnEditAccount.Click += new System.EventHandler(this.btnEditAccount_Click);
             // 
             // btnDeleteAccount
             // 
@@ -932,6 +927,7 @@
             this.btnDeleteAccount.TabIndex = 1;
             this.btnDeleteAccount.Text = "&DELETE";
             this.btnDeleteAccount.UseVisualStyleBackColor = true;
+            this.btnDeleteAccount.Click += new System.EventHandler(this.btnDeleteAccount_Click);
             // 
             // btnAddAccount
             // 
@@ -941,6 +937,7 @@
             this.btnAddAccount.TabIndex = 0;
             this.btnAddAccount.Text = "&ADD";
             this.btnAddAccount.UseVisualStyleBackColor = true;
+            this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
             // panel29
             // 
@@ -958,6 +955,19 @@
             this.dtgvAccount.Name = "dtgvAccount";
             this.dtgvAccount.Size = new System.Drawing.Size(425, 321);
             this.dtgvAccount.TabIndex = 0;
+            // 
+            // numericUpDownRole
+            // 
+            this.numericUpDownRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownRole.Location = new System.Drawing.Point(112, 10);
+            this.numericUpDownRole.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownRole.Name = "numericUpDownRole";
+            this.numericUpDownRole.Size = new System.Drawing.Size(166, 26);
+            this.numericUpDownRole.TabIndex = 1;
             // 
             // fAdmin
             // 
@@ -1021,6 +1031,7 @@
             this.panel28.ResumeLayout(false);
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1078,7 +1089,6 @@
         private System.Windows.Forms.DataGridView dtgvCategory;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.ComboBox cbTableStatus;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.TextBox txbTableName;
@@ -1096,7 +1106,6 @@
         private System.Windows.Forms.Panel panel23;
         private System.Windows.Forms.Button btnResetPassword;
         private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.ComboBox cbAccountType;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel26;
         private System.Windows.Forms.TextBox txbDisplayName;
@@ -1111,5 +1120,7 @@
         private System.Windows.Forms.Button btnAddAccount;
         private System.Windows.Forms.Panel panel29;
         private System.Windows.Forms.DataGridView dtgvAccount;
+        private System.Windows.Forms.TextBox txbTableStatus;
+        private System.Windows.Forms.NumericUpDown numericUpDownRole;
     }
 }

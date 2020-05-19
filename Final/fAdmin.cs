@@ -19,6 +19,9 @@ namespace Final
         BindingSource foodList = new BindingSource();
         BindingSource categoryList = new BindingSource();
         BindingSource tableList = new BindingSource();
+        BindingSource accountList = new BindingSource();
+
+        public Account loginAccount;
         public fAdmin()
         {
             InitializeComponent();
@@ -95,16 +98,24 @@ namespace Final
             dtgvFood.DataSource = foodList;
             dtgvCategory.DataSource = categoryList;
             dtgvTable.DataSource = tableList;
+            dtgvAccount.DataSource = accountList;
             LoadDateTimePickerBill();
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadListFood();
             LoadListCategory();
             LoadListTable();
+            LoadAccount();
             LoadCategoryIntoCombobox(cbFoodCategory);
-            LoadStausIntoCombobox(cbTableStatus);
             AddFoodBinding();
             AddCategoryBinding();
             AddTableBinding();
+            AddAccountBinding();
+        }
+        void AddAccountBinding()
+        {
+            txbUserName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
+            txbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
+            numericUpDownRole.DataBindings.Add(new Binding("Value", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
         }
         void AddCategoryBinding()
         {
@@ -122,6 +133,7 @@ namespace Final
         {
             txbTableID.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "ID", true, DataSourceUpdateMode.Never));
             txbTableName.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Name", true, DataSourceUpdateMode.Never));
+            txbTableStatus.DataBindings.Add(new Binding("Text", dtgvTable.DataSource, "Status", true, DataSourceUpdateMode.Never));
         }
 
         void LoadCategoryIntoCombobox(ComboBox cb)
@@ -130,11 +142,6 @@ namespace Final
             cb.DisplayMember = "Name";
         }
 
-        void LoadStausIntoCombobox(ComboBox cb)
-        {
-            cb.DataSource = TableDAO.Instance.LoadTableList();
-            cb.DisplayMember = "Status";
-        }
 
         void LoadDateTimePickerBill()
         {
@@ -162,8 +169,79 @@ namespace Final
         {
             tableList.DataSource = TableDAO.Instance.LoadTableList();
         }
+        void AddAccount(string userName, string displayName, int type)
+        {
+            if(AccountDAO.Instance.InsertAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Added succeed");
 
+            }
+            else
+            {
+                MessageBox.Show("Added failure");
+            }
+
+            LoadAccount();
+        }
+
+        void EditAccount(string userName, string displayName, int type)
+        {
+            if (AccountDAO.Instance.UpdateAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Edited succeed");
+
+            }
+            else
+            {
+                MessageBox.Show("Edited failure");
+            }
+
+            LoadAccount();
+        }
+
+
+        void DeleteAccount(string userName)
+        {
+            if(loginAccount.UserName.Equals(userName))
+            {
+                MessageBox.Show("Don't delete yourself!");
+                return;
+            }
+            if (AccountDAO.Instance.DeleteAccount(userName))
+            {
+                MessageBox.Show("Deleted succeed");
+
+            }
+            else
+            {
+                MessageBox.Show("Deleted failure");
+            }
+
+            LoadAccount();
+        }
+
+        void ResetPass(string userName)
+        {
+            if (AccountDAO.Instance.ResetPassword(userName))
+            {
+                MessageBox.Show("Reset password succeed");
+
+            }
+            else
+            {
+                MessageBox.Show("Reset password failure");
+            }
+
+            
+        }
+
+        void LoadAccount()
+        {
+            accountList.DataSource = AccountDAO.Instance.GetListAccount();
+        }
         #endregion
+
+
 
         #region events
         private void btnViewBill_Click(object sender, EventArgs e)
@@ -380,31 +458,8 @@ namespace Final
 
         private void txbTableID_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-
-                if (dtgvTable.SelectedCells.Count >0)
-                {
-                    int id = (int)dtgvTable.SelectedCells[0].OwningRow.Cells["status"].Value;
-
-                    Table tablefood = TableDAO.Instance.GetTableByID(id);
-
-                    cbTableStatus.SelectedItem = tablefood;
-
-                    int index = -1;
-                    int i = 0;
-                    foreach (Table item in cbTableStatus.Items)
-                    {
-                        if(item.ID == tablefood.ID)
-                        {
-                            index = i;
-                            break;
-                        }
-                        i++;
-                    }
-                }
-            }
-            catch { }
+           
+            
         }
 
         private void btnAddTable_Click(object sender, EventArgs e)
@@ -424,6 +479,7 @@ namespace Final
             {
                 MessageBox.Show("There is a error occurs when adding table");
             }
+            LoadListTable();
         }
 
         private void btnEditTable_Click(object sender, EventArgs e)
@@ -442,6 +498,7 @@ namespace Final
             {
                 MessageBox.Show("There is a error occurs when editing table");
             }
+            LoadListTable();
         }
 
         private void btnDeleteTable_Click(object sender, EventArgs e)
@@ -459,6 +516,51 @@ namespace Final
             {
                 MessageBox.Show("There is a error occurs when deleting table");
             }
+            LoadListTable();
+        }
+
+        private void btnShowAccount_Click(object sender, EventArgs e)
+        {
+            LoadAccount();
+        }
+
+        private void cbTableStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+            string displayName = txbDisplayName.Text;
+            int type = (int)numericUpDownRole.Value;
+
+            AddAccount(userName, displayName, type);
+        }
+
+        private void btnDeleteAccount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+          
+
+            DeleteAccount(userName);
+        }
+
+        private void btnEditAccount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+            string displayName = txbDisplayName.Text;
+            int type = (int)numericUpDownRole.Value;
+
+           EditAccount(userName, displayName, type);
+        }
+
+        private void btnResetPassword_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+
+
+            ResetPass(userName);
         }
     }
 }

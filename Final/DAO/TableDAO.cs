@@ -71,7 +71,7 @@ namespace Final.DAO
 
         public bool DeleteTable(int idTable)
         {
-            BillInfoDAO.Instance.DeleteBillInfoByFoodID(idTable);
+            BillDAO.Instance.DeleteBillByTableID(idTable);
             string query = string.Format("DELETE TableFood WHERE id = {0}", idTable);
             int result = DataProvider.Instance.ExecuteNonQuery(query);
 
