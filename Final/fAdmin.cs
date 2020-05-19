@@ -73,6 +73,7 @@ namespace Final
         private void fAdmin_Load(object sender, EventArgs e)
         {
 
+
         }
 
         private void tpAccount_Click(object sender, EventArgs e)
@@ -561,6 +562,49 @@ namespace Final
 
 
             ResetPass(userName);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txbPageBill.Text = "1";
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDateAndPage(dtpkFromDate.Value, dtpkToDate.Value, Convert.ToInt32(txbPageBill.Text));
+        }
+
+        private void btnPrevioudPage_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(txbPageBill.Text);
+
+            if (page > 1)
+                page--;
+
+            txbPageBill.Text = page.ToString();
+        }
+
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+
+            int lastPage = sumRecord / 10;
+
+            if (sumRecord % 10 != 0)
+                lastPage++;
+
+            txbPageBill.Text = lastPage.ToString();
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            int page = Convert.ToInt32(txbPageBill.Text);
+            int sumRecord = BillDAO.Instance.GetNumBillListByDate(dtpkFromDate.Value, dtpkToDate.Value);
+
+            if (page < sumRecord)
+                page++;
+
+            txbPageBill.Text = page.ToString();
         }
     }
 }

@@ -324,6 +324,14 @@ namespace Final
 
         }
 
-      
+        private void payToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheckOut_Click(this, new EventArgs());
+        }
+
+        private void addFoodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddFood_Click(this, new EventArgs());
+        }
     }
 }

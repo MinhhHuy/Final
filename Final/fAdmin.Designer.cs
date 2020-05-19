@@ -30,6 +30,11 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpBill = new System.Windows.Forms.TabPage();
+            this.txbPageBill = new System.Windows.Forms.TextBox();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
+            this.btnPrevioudPage = new System.Windows.Forms.Button();
+            this.btnFirstPage = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnViewBill = new System.Windows.Forms.Button();
             this.dtpkToDate = new System.Windows.Forms.DateTimePicker();
@@ -97,6 +102,7 @@
             this.panel23 = new System.Windows.Forms.Panel();
             this.btnResetPassword = new System.Windows.Forms.Button();
             this.panel25 = new System.Windows.Forms.Panel();
+            this.numericUpDownRole = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.panel26 = new System.Windows.Forms.Panel();
             this.txbDisplayName = new System.Windows.Forms.TextBox();
@@ -111,7 +117,6 @@
             this.btnAddAccount = new System.Windows.Forms.Button();
             this.panel29 = new System.Windows.Forms.Panel();
             this.dtgvAccount = new System.Windows.Forms.DataGridView();
-            this.numericUpDownRole = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tpBill.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -146,12 +151,12 @@
             this.tpAccount.SuspendLayout();
             this.panel23.SuspendLayout();
             this.panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).BeginInit();
             this.panel26.SuspendLayout();
             this.panel27.SuspendLayout();
             this.panel28.SuspendLayout();
             this.panel29.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -164,20 +169,77 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(735, 426);
+            this.tabControl1.Size = new System.Drawing.Size(735, 458);
             this.tabControl1.TabIndex = 0;
             // 
             // tpBill
             // 
+            this.tpBill.Controls.Add(this.txbPageBill);
+            this.tpBill.Controls.Add(this.btnNextPage);
+            this.tpBill.Controls.Add(this.btnLastPage);
+            this.tpBill.Controls.Add(this.btnPrevioudPage);
+            this.tpBill.Controls.Add(this.btnFirstPage);
             this.tpBill.Controls.Add(this.panel2);
             this.tpBill.Controls.Add(this.panel1);
             this.tpBill.Location = new System.Drawing.Point(4, 22);
             this.tpBill.Name = "tpBill";
             this.tpBill.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBill.Size = new System.Drawing.Size(727, 400);
+            this.tpBill.Size = new System.Drawing.Size(727, 432);
             this.tpBill.TabIndex = 0;
             this.tpBill.Text = "Revenue";
             this.tpBill.UseVisualStyleBackColor = true;
+            // 
+            // txbPageBill
+            // 
+            this.txbPageBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPageBill.Location = new System.Drawing.Point(314, 397);
+            this.txbPageBill.Name = "txbPageBill";
+            this.txbPageBill.ReadOnly = true;
+            this.txbPageBill.Size = new System.Drawing.Size(100, 29);
+            this.txbPageBill.TabIndex = 4;
+            this.txbPageBill.Text = "1";
+            this.txbPageBill.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txbPageBill.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Location = new System.Drawing.Point(541, 397);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(87, 29);
+            this.btnNextPage.TabIndex = 3;
+            this.btnNextPage.Text = "&NEXT";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Location = new System.Drawing.Point(634, 397);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(87, 29);
+            this.btnLastPage.TabIndex = 2;
+            this.btnLastPage.Text = "&LAST";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
+            // 
+            // btnPrevioudPage
+            // 
+            this.btnPrevioudPage.Location = new System.Drawing.Point(96, 397);
+            this.btnPrevioudPage.Name = "btnPrevioudPage";
+            this.btnPrevioudPage.Size = new System.Drawing.Size(87, 29);
+            this.btnPrevioudPage.TabIndex = 2;
+            this.btnPrevioudPage.Text = "&PREVIOUS";
+            this.btnPrevioudPage.UseVisualStyleBackColor = true;
+            this.btnPrevioudPage.Click += new System.EventHandler(this.btnPrevioudPage_Click);
+            // 
+            // btnFirstPage
+            // 
+            this.btnFirstPage.Location = new System.Drawing.Point(3, 397);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(87, 29);
+            this.btnFirstPage.TabIndex = 1;
+            this.btnFirstPage.Text = "&FIRST";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -246,7 +308,7 @@
             this.tpFood.Location = new System.Drawing.Point(4, 22);
             this.tpFood.Name = "tpFood";
             this.tpFood.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFood.Size = new System.Drawing.Size(727, 400);
+            this.tpFood.Size = new System.Drawing.Size(727, 432);
             this.tpFood.TabIndex = 1;
             this.tpFood.Text = "Food";
             this.tpFood.UseVisualStyleBackColor = true;
@@ -476,7 +538,7 @@
             this.tbFoodCategory.Location = new System.Drawing.Point(4, 22);
             this.tbFoodCategory.Name = "tbFoodCategory";
             this.tbFoodCategory.Padding = new System.Windows.Forms.Padding(3);
-            this.tbFoodCategory.Size = new System.Drawing.Size(727, 400);
+            this.tbFoodCategory.Size = new System.Drawing.Size(727, 432);
             this.tbFoodCategory.TabIndex = 2;
             this.tbFoodCategory.Text = "Category";
             this.tbFoodCategory.UseVisualStyleBackColor = true;
@@ -619,7 +681,7 @@
             this.tpTable.Location = new System.Drawing.Point(4, 22);
             this.tpTable.Name = "tpTable";
             this.tpTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTable.Size = new System.Drawing.Size(727, 400);
+            this.tpTable.Size = new System.Drawing.Size(727, 432);
             this.tpTable.TabIndex = 3;
             this.tpTable.Text = "Table";
             this.tpTable.UseVisualStyleBackColor = true;
@@ -790,7 +852,7 @@
             this.tpAccount.Location = new System.Drawing.Point(4, 22);
             this.tpAccount.Name = "tpAccount";
             this.tpAccount.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAccount.Size = new System.Drawing.Size(727, 400);
+            this.tpAccount.Size = new System.Drawing.Size(727, 432);
             this.tpAccount.TabIndex = 4;
             this.tpAccount.Text = "Account";
             this.tpAccount.UseVisualStyleBackColor = true;
@@ -825,6 +887,19 @@
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(281, 45);
             this.panel25.TabIndex = 5;
+            // 
+            // numericUpDownRole
+            // 
+            this.numericUpDownRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownRole.Location = new System.Drawing.Point(112, 10);
+            this.numericUpDownRole.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownRole.Name = "numericUpDownRole";
+            this.numericUpDownRole.Size = new System.Drawing.Size(166, 26);
+            this.numericUpDownRole.TabIndex = 1;
             // 
             // label11
             // 
@@ -956,24 +1031,11 @@
             this.dtgvAccount.Size = new System.Drawing.Size(425, 321);
             this.dtgvAccount.TabIndex = 0;
             // 
-            // numericUpDownRole
-            // 
-            this.numericUpDownRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownRole.Location = new System.Drawing.Point(112, 10);
-            this.numericUpDownRole.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownRole.Name = "numericUpDownRole";
-            this.numericUpDownRole.Size = new System.Drawing.Size(166, 26);
-            this.numericUpDownRole.TabIndex = 1;
-            // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(759, 450);
+            this.ClientSize = new System.Drawing.Size(759, 469);
             this.Controls.Add(this.tabControl1);
             this.Name = "fAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -981,6 +1043,7 @@
             this.Load += new System.EventHandler(this.fAdmin_Load);
             this.tabControl1.ResumeLayout(false);
             this.tpBill.ResumeLayout(false);
+            this.tpBill.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBill)).EndInit();
@@ -1024,6 +1087,7 @@
             this.panel23.ResumeLayout(false);
             this.panel25.ResumeLayout(false);
             this.panel25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).EndInit();
             this.panel26.ResumeLayout(false);
             this.panel26.PerformLayout();
             this.panel27.ResumeLayout(false);
@@ -1031,7 +1095,6 @@
             this.panel28.ResumeLayout(false);
             this.panel29.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvAccount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRole)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1122,5 +1185,10 @@
         private System.Windows.Forms.DataGridView dtgvAccount;
         private System.Windows.Forms.TextBox txbTableStatus;
         private System.Windows.Forms.NumericUpDown numericUpDownRole;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.TextBox txbPageBill;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.Button btnPrevioudPage;
     }
 }
